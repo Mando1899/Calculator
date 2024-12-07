@@ -9,7 +9,17 @@ function operate() {
     if (operations.length === 1) {
         result = operations[0]['value'];
     } else {
-        operations[1]['value'] = operations[0]['value'] + operations[1]['value'];
+        if (operations[0]['operationType'] === 'add') {
+            operations[1]['value'] = operations[0]['value'] + operations[1]['value'];
+        } else if (operations[0]['operationType'] === 'subtract') {
+            operations[1]['value'] = operations[0]['value'] - operations[1]['value'];
+        } else if (operations[0]['operationType'] === 'multiply') {
+            operations[1]['value'] = operations[0]['value'] * operations[1]['value'];
+        } else if (operations[0]['operationType'] === 'divide') {
+            operations[1]['value'] = operations[0]['value'] / operations[1]['value'];
+        }
+        
+        
         operations.shift();
     }
 }
