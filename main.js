@@ -3,6 +3,8 @@ const numBtns = document.querySelectorAll(".number");
 const operationBtns = document.querySelectorAll(".operation");
 
 let operations = [];
+let value = '';
+let shouldDelete = false;
 
 
 function operate() {
@@ -18,24 +20,28 @@ function operate() {
         } else if (operations[0]['operationType'] === 'divide') {
             operations[1]['value'] = operations[0]['value'] / operations[1]['value'];
         }
-        
-        
         operations.shift();
     }
 }
 
 numBtns.forEach((button) => {
     button.addEventListener("click", () => {
+        if(shouldDelete) {
+            output.value = ''
+            shouldDelete = false;
+        }
+        value = value + button.innerText;
         output.value = output.value + button.innerText;
     })
 });
 
 operationBtns.forEach((button) => {
     button.addEventListener('click', () => {
-        operations.push({'value': Number(output.value), 'operationType': button.id});
+        operations.push({'value': Number(value), 'operationType': button.id});
         operate();
-        output.value = '';
-        if (button.id === 'equals') output.value = operations[0]['value'];
-        console.log(operations);
+        value = '';
+        output.value = operations[0]['value'];
+        if (button.id === 'equals') value = operations[0]['value'];
+        shouldDelete = true;
     })
 });
