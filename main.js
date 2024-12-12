@@ -33,7 +33,11 @@ function operate() {
             operations[1]['value'] = operations[0]['value'] * operations[1]['value'];
         } else if (operations[0]['operationType'] === 'divide') {
             operations[1]['value'] = operations[0]['value'] / operations[1]['value'];
+        } else if (operations[0]['operationType'] === 'equals') {
+            operations[1]['value'] = operations[0]['value'];
         }
+        console.log(operations);
+
         operations.shift();
     } 
 }
