@@ -8,11 +8,13 @@ let operations = [];
 let value = '';
 let shouldDelete = false;
 
+// this is a test line to commit
+
 cleatBtn.addEventListener('click', () =>{
     output.value = '';
     value = ''
     operations = [];
-    console.log(operations)
+    console.log(operations);
     
 });
 
