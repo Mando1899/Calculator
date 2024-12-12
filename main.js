@@ -1,11 +1,25 @@
 const output = document.querySelector("#result");
 const numBtns = document.querySelectorAll(".number");
 const operationBtns = document.querySelectorAll(".operation");
+const deleteBtn = document.querySelector("#delete");
+const cleatBtn = document.querySelector('#clear')
 
 let operations = [];
 let value = '';
 let shouldDelete = false;
 
+cleatBtn.addEventListener('click', () =>{
+    output.value = '';
+    value = ''
+    operations = [];
+    console.log(operations)
+    
+});
+
+deleteBtn.addEventListener('click', () => {
+    output.value = output.value.slice(0, -1);
+    value = Number(output.value);
+});
 
 function operate() {
     if (operations.length === 1) {
@@ -21,7 +35,7 @@ function operate() {
             operations[1]['value'] = operations[0]['value'] / operations[1]['value'];
         }
         operations.shift();
-    }
+    } 
 }
 
 numBtns.forEach((button) => {
