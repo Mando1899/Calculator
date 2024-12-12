@@ -5,26 +5,19 @@ const deleteBtn = document.querySelector("#delete");
 const cleatBtn = document.querySelector('#clear')
 
 let operations = [];
-let value = '';
 let shouldDelete = false;
-
-// this is a test line to commit
 
 cleatBtn.addEventListener('click', () =>{
     output.value = '';
-    value = ''
     operations = [];
-    console.log(operations);
-    
 });
 
 deleteBtn.addEventListener('click', () => {
     output.value = output.value.slice(0, -1);
-    value = Number(output.value);
 });
 
 function operate() {
-    if (operations.length === 1) {
+    if (operations.length <= 1) {
         result = operations[0]['value'];
     } else {
         if (operations[0]['operationType'] === 'add') {
@@ -35,31 +28,25 @@ function operate() {
             operations[1]['value'] = operations[0]['value'] * operations[1]['value'];
         } else if (operations[0]['operationType'] === 'divide') {
             operations[1]['value'] = operations[0]['value'] / operations[1]['value'];
-        } else if (operations[0]['operationType'] === 'equals') {
-            operations[1]['value'] = operations[0]['value'];
-        }
-        console.log(operations);
-
+        } 
         operations.shift();
     } 
 }
 
 numBtns.forEach((button) => {
     button.addEventListener("click", () => {
-        if(shouldDelete) {
+        if(shouldDelete || (output.value === '0' && button.id !== 'dPoint')) {
             output.value = ''
             shouldDelete = false;
         }
-        value = value + button.innerText;
-        output.value = output.value + button.innerText;
+        output.value = output.value + button.innerText;        
     })
 });
 
 operationBtns.forEach((button) => {
     button.addEventListener('click', () => {
-        operations.push({'value': Number(value), 'operationType': button.id});
+        operations.push({'value': Number(output.value), 'operationType': button.id});
         operate();
-        value = '';
         output.value = operations[0]['value'];
         if (button.id === 'equals') value = operations[0]['value'];
         shouldDelete = true;
