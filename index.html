@@ -9,8 +9,9 @@
     </head>
     <body>
         <div id="main-container">
-            <div id="output">
-                <input value="" onkeydown="return false" id="result">
+            <div id="display">
+                <div id="output">0</div>
+                <div id="operationDisplay"></div>
             </div>
             <div id="buttons">
                 <button class="wide-btn" id="clear">CLEAR</button>
@@ -27,7 +28,7 @@
                 <button class="btn number">8</button>
                 <button class="btn number">9</button>
                 <button class="btn operation" id="multiply">x</button>
-                <button class="btn number">.</button>  
+                <button class="btn number" id="dPoint">.</button>  
                 <button class="btn number">0</button>
                 <button class="btn operation" id="equals">=</button>
                 <button class="btn operation" id="divide">÷</button>

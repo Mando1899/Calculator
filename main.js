@@ -1,4 +1,5 @@
-const output = document.querySelector("#result");
+const output = document.querySelector("#output");
+const operationDisplay = document.querySelector("#operationDisplay");
 const numBtns = document.querySelectorAll(".number");
 const operationBtns = document.querySelectorAll(".operation");
 const deleteBtn = document.querySelector("#delete");
@@ -8,12 +9,12 @@ let operations = [];
 let shouldDelete = false;
 
 cleatBtn.addEventListener('click', () =>{
-    output.value = '';
+    output.innerText= '';
     operations = [];
 });
 
 deleteBtn.addEventListener('click', () => {
-    output.value = output.value.slice(0, -1);
+    output.innerText = output.innerText.slice(0, -1);
 });
 
 function operate() {
@@ -21,7 +22,7 @@ function operate() {
         result = operations[0]['value'];
     } else {
         if (operations[0]['operationType'] === 'add') {
-            operations[1]['value'] = operations[0]['value'] + operations[1]['value'];
+            operations[1]['value'] = operations[0]['value'] + operations[1]['value'];  
         } else if (operations[0]['operationType'] === 'subtract') {
             operations[1]['value'] = operations[0]['value'] - operations[1]['value'];
         } else if (operations[0]['operationType'] === 'multiply') {
@@ -35,20 +36,25 @@ function operate() {
 
 numBtns.forEach((button) => {
     button.addEventListener("click", () => {
-        if(shouldDelete || (output.value === '0' && button.id !== 'dPoint')) {
-            output.value = ''
+        if(shouldDelete || (output.innerText === '0' && button.id !== 'dPoint')) {
+            output.innerText = ''
             shouldDelete = false;
         }
-        output.value = output.value + button.innerText;        
+        output.innerText = output.innerText + button.innerText;        
     })
 });
 
 operationBtns.forEach((button) => {
     button.addEventListener('click', () => {
-        operations.push({'value': Number(output.value), 'operationType': button.id});
+        operations.push({'value': Number(output.innerText), 'operationType': button.id});
         operate();
-        output.value = operations[0]['value'];
-        if (button.id === 'equals') value = operations[0]['value'];
+        if (button.id !== 'equals') operationDisplay.innerText = operations[0]['value']  + button.innerText;
+
+        output.innerText = operations[0]['value'];
+        if (button.id === 'equals') {
+            value = operations[0]['value']
+            operationDisplay.innerText = '';
+        }
         shouldDelete = true;
     })
 });
