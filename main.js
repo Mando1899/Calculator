@@ -9,7 +9,8 @@ let operations = [];
 let shouldDelete = false;
 
 cleatBtn.addEventListener('click', () =>{
-    output.innerText= '';
+    output.innerText = '';
+    operationDisplay = '';
     operations = [];
 });
 
