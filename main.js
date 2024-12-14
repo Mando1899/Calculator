@@ -3,13 +3,13 @@ const operationDisplay = document.querySelector("#operationDisplay");
 const numBtns = document.querySelectorAll(".number");
 const operationBtns = document.querySelectorAll(".operation");
 const deleteBtn = document.querySelector("#delete");
-const cleatBtn = document.querySelector('#clear')
+const cleatBtn = document.querySelector('#clear');
 
 let operations = [];
 let shouldDelete = false;
 
 cleatBtn.addEventListener('click', () =>{
-    output.innerText = '';
+    output.innerText = '0';
     operationDisplay.innerText = '';
     operations = [];
 });
@@ -35,13 +35,14 @@ function operate() {
     } 
 }
 
+
 numBtns.forEach((button) => {
     button.addEventListener("click", () => {
         if(shouldDelete || (output.innerText === '0' && button.id !== 'dPoint')) {
-            output.innerText = ''
+            output.innerText = '';
             shouldDelete = false;
         }
-        output.innerText = output.innerText + button.innerText;        
+        if (!(output.innerText.includes('.') && button.id === 'dPoint')) output.innerText = output.innerText + button.innerText;
     })
 });
 
