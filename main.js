@@ -19,9 +19,10 @@ deleteBtn.addEventListener('click', () => {
 });
 
 function operate() {
+    console.log(operations[0], operations[1]);
     if (operations.length <= 1) {
         result = operations[0]['value'];
-    } else {
+    } else{
         if (operations[0]['operationType'] === 'add') {
             operations[1]['value'] = operations[0]['value'] + operations[1]['value'];  
         } else if (operations[0]['operationType'] === 'subtract') {
@@ -48,7 +49,9 @@ numBtns.forEach((button) => {
 
 operationBtns.forEach((button) => {
     button.addEventListener('click', () => {
-        operations.push({'value': Number(output.innerText), 'operationType': button.id});
+        if (!shouldDelete) operations.push({'value': Number(output.innerText), 'operationType': button.id}) 
+            else(operations[0]['operationType'] = button.id);
+
         operate();
         if (button.id !== 'equals') operationDisplay.innerText = operations[0]['value']  + button.innerText;
 
